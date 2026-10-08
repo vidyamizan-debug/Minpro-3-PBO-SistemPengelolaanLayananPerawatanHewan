@@ -114,7 +114,7 @@ Jika memilih opsi nomor 1 (perawatan), kita diminta mengisi formulir data layana
 
 * Tambah Data Layanan Penitipan
 
-<img width="215" height="233" alt="image" src="https://github.com/user-attachments/assets/54259fbe-ba41-4a36-84f8-f202f5b28887" />
+<img width="322" height="195" alt="Screenshot 2026-10-08 203850" src="https://github.com/user-attachments/assets/a3d7a6f3-a2ed-4a24-ae03-92d324e5c8f5" />
 
 Jika memilih opsi nomor 2 (penitipan), kita diminta mengisi formulir data layanan seperti pada gambar. Setelah mengisi formulir data umum, kita diminta memasukkan lama penitipan dalam hitungan hari seperti pada gambar. Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan dengan ID 4." yang menandakan data telah tersimpan.
 
