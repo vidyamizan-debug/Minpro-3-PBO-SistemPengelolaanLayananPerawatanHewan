@@ -6,84 +6,93 @@
 Sistem Pengelolaan Layanan Perawatan Hewan adalah sebuah program berbasis bahasa pemrograman Java yang digunakan untuk mengelola data layanan perawatan hewan secara sederhana. Program ini berfokus pada layanan perawatan kebersihan dan penampilan hewan, yaitu Perawatan (mandi, potong kuku, perawatan bulu) dan Penitipan (jasa menitipkan hewan selama jangka waktu tertentu). Program ini memungkinkan pengguna untuk melakukan CRUD (Create, Read, Update, Delete) sederhana terhadap data layanan tersebut.
 
 ## Class yang ada di Program ini
-**1. Minpro2PBOKyaPetCare.java**\
-Merupakan class utama atau entry point yang digunakan untuk menjalankan program. Class ini menampilkan menu utama, menerima input pilihan dari pengguna, dan memanggil fungsi yang sesuai dari class CRUDLayananKyaPetCare.java.
+**1. KyaPetCareMinpro3.java**\
+Merupakan class utama atau entry point yang digunakan untuk menjalankan program. Class ini hanya memanggil satu method, yaitu 'jalankan()' dari class CRUDKyaPetCare.java, sehingga seluruh alur menu dan logika program terpusat di satu tempat.
 
 **2. Layanan.java**\
-Merupakan class entitas (superclass) yang menyimpan informasi umum mengenai layanan perawatan hewan, seperti ID layanan, nama layanan, deskripsi, harga, serta data hewan terkait (nama hewan, nama pemilik, jenis hewan, ras hewan, umur hewan). Class ini menerapkan constructor, getter, setter, dan encapsulation.
+Merupakan abstract class (superclass) yang menyimpan informasi umum mengenai layanan perawatan hewan, seperti ID layanan, nama layanan, catatan untuk petugas, harga, serta data hewan terkait (nama hewan, nama pemilik, jenis hewan, umur hewan). Class ini menerapkan constructor, getter, setter dengan validasi, encapsulation, serta memiliki satu abstract method yaitu 'getKategori()'.
 
 **3. Perawatan.java**\
-Merupakan class entitas (subclass dari Layanan) yang menambahkan atribut khusus jenisPerawatan, digunakan untuk data layanan yang berfokus pada kebersihan dan penampilan hewan.
+Merupakan class entitas (subclass dari Layanan, implements Evalutable) yang digunakan untuk data layanan yang berfokus pada kebersihan dan penampilan hewan (Mandi, Potong Kuku, atau Bulu).
 
 **4. Penitipan.java**\
-Merupakan class entitas (subclass dari Layanan) yang menambahkan atribut khusus lamaPenitipan, digunakan untuk data layanan jasa menitipkan hewan selama jangka waktu tertentu.
+Merupakan class entitas (subclass dari Layanan, implements Evalutable) yang menambahkan atribut khusus lamaPenitipan, digunakan untuk data layanan jasa menitipkan hewan selama jangka waktu tertentu.
 
 **5. CekKyaPetCare.java**\
-Merupakan class yang menangani validasi seluruh input dari pengguna, seperti validasi angka, validasi angka harus lebih dari 0, validasi string tidak boleh kosong, validasi pilihan menu, dan validasi jawaban ya atau tidak.
+Merupakan class yang menangani validasi seluruh input dari pengguna, seperti validasi angka, validasi angka harus lebih dari 0, validasi string tidak boleh kosong, validasi pilihan menu, validasi jawaban ya atau tidak, serta validasi ID dengan opsi pembatalan jika input dikosongkan.
 
-**6. CRUDLayananKyaPetCare.java**\
-Merupakan class yang menangani proses CRUD pada program. Class ini menggunakan ArrayList untuk menyimpan data layanan. Class ini menyediakan fungsi untuk menambah, menampilkan, mengubah, dan menghapus data layanan.
+**6. CRUDKyaPetCare.java**\
+Merupakan class yang menangani proses CRUD pada program sekaligus menjalankan alur menu utama melalui method 'jalankan()'. Class ini menggunakan ArrayList untuk menyimpan data layanan, dan menyediakan fungsi untuk menambah, menampilkan, mengubah, dan menghapus data layanan.
 
-**7. Menu.java**
+**7. Menu.java**\
 Merupakan class yang menampilkan tampilan menu utama program ke layar.
 
-## Alur Perencanaan Program
-Alur program dimulai ketika program dijalankan melalui class Minpro2PBOKyaPetCare.java. Program akan menampilkan menu utama yang berisi lima pilihan, yaitu Tambah Data Layanan, Tampilkan Data Layanan, Update Data Layanan, Hapus Data Layanan, dan Keluar.
+**8. Evalutable.java**\
+Merupakan interface yang mendeklarasikan method 'hitungDiskon()'. Interface ini diimplementasikan oleh class Perawatan dan Penitipan, masing-masing dengan aturan diskon yang berbeda.
 
-Pengguna memilih menu dengan memasukkan angka sesuai pilihan. Program kemudian menggunakan percabangan untuk menentukan proses yang akan dijalankan berdasarkan pilihan pengguna. Pada menu Tambah Data, Tampilkan Data, Hapus Data, dan Update Data. Berbeda dengan pengerjaan sebelumnya yang memisahkan data Pemilik, Hewan, dan Layanan, pada Minpro 2 ini data hewan dan pemilik digabungkan menjadi atribut di dalam data Layanan itu sendiri, sehingga satu data layanan sudah mewakili satu transaksi lengkap untuk satu hewan. Pengguna cukup memilih jenis layanannya (Perawatan atau Penitipan) saat menambah data.
+## Penerapan Polymorphism
+Berikut ini ialah penerapan kedua jenis polymorphism yang saya gunakan:
 
-## Penerapan Encapsulation
-Encapsulation diterapkan pada seluruh class di package model, yaitu class Layanan, Perawatan, Penitipan.
+### Override
 
-<img width="207" height="133" alt="image" src="https://github.com/user-attachments/assets/4cc0280c-653f-47b7-83c7-df127387cc68" />
+<img width="401" height="153" alt="image" src="https://github.com/user-attachments/assets/e00ee4f1-3ea2-4142-a4c6-04b11dc7b896" />
 
-Seperti yang dapt dilihat pada gambar di atas, seluruh atribut yang berada di dalam class Layanan, yang nantinya akan diturunkan ke subclass, dibuat menjadi protected. Sehingga data tidak dapat diakses langsung dari luar class. Untuk atribut id dibuat menjadi private final, sehingga hanya bisa sekali lewat di constructor dan tidak memiliki setter.
+<img width="377" height="69" alt="image" src="https://github.com/user-attachments/assets/6090509c-5bfa-406f-beca-d9989e601d38" />
 
-<img width="197" height="39" alt="image" src="https://github.com/user-attachments/assets/2da2dd8a-66f9-4905-8c74-412623e2c69d" />
+<img width="417" height="83" alt="image" src="https://github.com/user-attachments/assets/95e6786e-d896-48c0-b30b-73fe5449a0e8" />
 
-<img width="293" height="41" alt="image" src="https://github.com/user-attachments/assets/e8027d65-d902-427f-816c-925a32c743d0" />
+Salah satunya yang menggunakan Override adalah method 'tampilkanInfo()' yang ada di superclass Layanan di-override oleh subclass Perawatan dan Penitipan. Masing-masing subclass memanggil 'super.tampilkanInfo()' terlebih dahulu untuk menampilkan info umum, lalu menambahkan baris info khusus miliknya sendiri (diskon untuk Perawatan, lama penitipan dan diskon untuk Penitipan). Dengan begitu, meskipun dipanggil dengan cara yang sama lewat satu ArrayList bertipe Layanan, hasil tampilannya berbeda tergantung jenis objeknya.
 
-Setiap atribut yang boleh diubah memiliki getter dan setter, sehingga perubahan data hanya bisa dilakukan lewat method yang sudah disediakan. Hal ini berlaku untuk semua atribut kecuali atribut id.
+### Overload
 
-## Penerapan Inheritance
-Inheritance diterapkan pada class yang berada di package model.
+<img width="484" height="93" alt="image" src="https://github.com/user-attachments/assets/302eb1bb-652a-4dbf-886d-c6fbb89bce42" />
 
-<img width="619" height="310" alt="image" src="https://github.com/user-attachments/assets/116dd1b4-bb86-4c20-af6c-3b10657240e7" />
+Salah satunya yang menggunakan Overload ialah method 'cetakStatus()' pada class Layanan yang memiliki dua versi, yaitu tanpa parameter (menampilkan status "Layanan Aktif") dan dengan parameter String (menampilkan status "Layanan Aktif" ditambah catatan tertentu, misalnya "Dapat Diskon").
 
-Seperti yang dapat dilihat pada gambar di atas, class Layanan merupakan superclass yang menyimpan atribut umum (idLayanan, namaLayanan, deskripsi, harga) beserta data hewan terkait (namaHewan, namaPemilik, jenisHewan, rasHewan, umurHewan).
+## Penerapan Abstraction
+Abstraction pada program ini diterapkan melalui abstract class dan abstract method pada class Layanan.
 
-<img width="685" height="119" alt="image" src="https://github.com/user-attachments/assets/094c72b7-b78b-48ac-b155-92ae59613c92" />
+<img width="229" height="27" alt="image" src="https://github.com/user-attachments/assets/b3e93624-ae58-4bb8-a2f8-29f092f426f6" />
 
-<img width="683" height="121" alt="image" src="https://github.com/user-attachments/assets/6ed64378-fbcd-45e5-8aba-e471bc3c494c" />
+Class Layanan dideklarasikan sebagai abstract class, sehingga tidak dapat dibuat objeknya secara langsung (tidak bisa menulis 'new Layanan(...)'). Hal ini memastikan setiap objek yang dibuat harus berupa subclass yang jelas jenisnya, yaitu Perawatan atau Penitipan.
 
-Kedua gambar di atas menunjukkan bahwa class  Perawatan dan Penitipan merupakan subclass yang menggunakan extends Layanan, sehingga mewarisi seluruh atribut dan method dari Layanan, ditambah atribut khusus masing-masing (jenisPerawatan untuk Perawatan, lamaPenitipan untuk Penitipan). Kedua subclass tersebut memanggil constructor superclass menggunakan super(...) untuk mengisi atribut umum sebelum mengisi atribut khususnya sendiri.
+<img width="230" height="16" alt="image" src="https://github.com/user-attachments/assets/c50ac496-7db8-4104-bb9c-057f205341db" />
+
+<img width="181" height="57" alt="image" src="https://github.com/user-attachments/assets/222fff43-c462-484f-8163-17aacca22148" />
+
+<img width="181" height="60" alt="image" src="https://github.com/user-attachments/assets/0f6ba0d3-59b8-434d-9e9d-7e5d948d64ab" />
+
+Class Layanan memiliki satu abstract method, yaitu 'getKategori()' yang tidak memiliki isi di superclass dan wajib diisi oleh setiap subclass. Class Perawatan mengembalikan nilai "Perawatan" dan class Penitipan mengembalikan nilai "Penitipan". Method ini kemudian dipanggil di dalam 'tampilkanInfo()' milik Layanan, sehingga superclass tidak perlu tahu detail bagaimana kategori ditentukan, cukup tahu bahwa method tersebut pasti tersedia di setiap subclass-nya.
+
+## Penerapan MVC (Model-View-Controller)
+
+<img width="189" height="176" alt="image" src="https://github.com/user-attachments/assets/d803c128-8276-4e40-87c2-186ce367842f" />
+
+* **Model** (package model): berisi class Layanan, Evalutable, Perawatan, dan Penitipan. Bagian ini murni menyimpan data dan perilaku dasar objek, tanpa ada kode input/output menu di dalamnya.
+* **View** (package View): berisi class Menu, yang tugasnya hanya menampilkan tampilan menu ke layar tanpa menyimpan data atau logika pemrosesan.
+* **Controller** (package Controller): berisi class CekKyaPetCare (khusus validasi input) dan CRUDKyaPetCare (khusus proses tambah, tampil, update, hapus data, sekaligus menjalankan alur menu utama). Bagian ini menghubungkan Model dan View, yaitu mengambil input dari pengguna, memvalidasinya, memproses data pada objek Model, lalu meminta View menampilkan tampilan.
 
 ## Penerapan Nilai Tambah
-Penerapan nilai tambah yang saya gunakan ada dua, yaitu penerapan pola MVC (Model-View-Controller) dan Polymorphism.
+Penerapan nilai tambah yang terapkan ialah penggunaan Interface.
 
-### MVC (Model-View-Controller)
-MVC digunakan agar kode program tidak tercampur dalam satu class besar. Dengan MVC, tampilan menu, penyimpanan data, dan proses logika program dipisah menjadi tiga bagian dengan tanggung jawabnya masing-masing, sehingga program lebih rapi, lebih mudah ditelusuri kalau ada kesalahan, dan lebih mudah dikembangkan tanpa mengganggu bagian lain.
+### Interface
 
-<img width="214" height="175" alt="image" src="https://github.com/user-attachments/assets/fb50137a-1166-4d8c-95ad-b6d226aec9b8" />
+<img width="181" height="39" alt="image" src="https://github.com/user-attachments/assets/937b0021-780e-40bc-9035-801485d4e77a" />
 
-Dapat dilihat dari gambar di atas, package model berisi class Layanan, Perawatan, dan Penitipan. Bagian ini murni menyimpan data dan perilaku dasar objek, tanpa ada kode input/output menu di dalamnya. Selanjutnya ada package view berisi class Menu, yang tugasnya hanya menampilkan tampilan menu ke layar tanpa menyimpan data atau logika pemrosesan. Dan yang terakhir ialah package controller berisi class CekKyaPetCare (khusus validasi input) dan CRUDLayananKyaPetCare (khusus proses tambah, tampil, update, dan hapus data). Bagian ini menghubungkan Model dan View, yaitu mengambil input dari pengguna, memvalidasinya, memproses data pada objek Model, lalu meminta View menampilkan tampilan.
+Interface Evalutable mendeklarasikan satu method, yaitu 'hitungDiskon()'. Interface ini digunakan agar logika perhitungan diskon dapat diterapkan secara seragam pada beberapa class yang berbeda, tanpa harus mewariskannya lewat superclass.
 
-### Polymorphism
-Polymorphism digunakan agar satu ArrayList bertipe Layanan bisa menampung objek Perawatan maupun Penitipan sekaligus, dan cukup dipanggil dengan cara yang sama (disini saya menggunakan 'tampilkanInfo()') tanpa harus membuat banyak percabangan untuk mengecek jenis objeknya satu per satu.
+<img width="185" height="95" alt="image" src="https://github.com/user-attachments/assets/bfac9928-b519-4da9-bc14-3916210837bd" />
 
-<img width="403" height="149" alt="image" src="https://github.com/user-attachments/assets/3f28de75-8da7-4068-a808-e0a91be43d4e" />
+<img width="379" height="95" alt="image" src="https://github.com/user-attachments/assets/edc90797-96f4-4cd2-b2ea-7a36441bc5d1" />
 
-Pada gambar di atas, dapat dilihat bahwa polymorphism diterapkan melalui method overriding pada method tampilkanInfo() yang ada di superclass Layanan. Method ini di-override oleh subclass Perawatan dan Penitipan, sehingga meskipun dipanggil dengan cara yang sama, hasil tampilan informasinya berbeda tergantung jenis objeknya.
+Class Perawatan dan Penitipan sama-sama mengimplementasikan interface Evalutable, namun dengan aturan perhitungan diskon yang berbeda. Pada Perawatan, diskon sebesar 10% dari harga diberikan jika nama layanannya adalah "Perawatan Bulu". Pada Penitipan, diskon tetap sebesar Rp20.000 diberikan jika lama penitipan sudah mencapai 5 hari atau lebih.
 
-<img width="422" height="83" alt="image" src="https://github.com/user-attachments/assets/055bee08-fa8c-482e-8669-bf60bde53ce9" />
+## Alur Program
+Alur program dimulai ketika program dijalankan melalui class KyaPetCareMinpro3.java, yang langsung memanggil method 'jalankan()' pada class CRUDKyaPetCare.java. Program akan menampilkan menu utama yang berisi lima pilihan, yaitu Tambah Data Layanan, Tampilkan Data Layanan, Update Data Layanan, Hapus Data Layanan, dan Keluar.
 
-Jika objeknya Penitipan, tampilkanInfo() akan menampilkan info umum layanan ditambah baris lama penitipan.
+Pengguna memilih menu dengan memasukkan angka sesuai pilihan. Saat menambah data, pengguna cukup memilih jenis layanannya (Perawatan atau Penitipan), lalu mengisi data umum (catatan untuk petugas, harga, data hewan) serta data khusus sesuai jenisnya. ID layanan dibuat otomatis oleh sistem sehingga pengguna tidak perlu menginputnya sendiri. Saat update atau hapus data, jika pengguna mengosongkan input ID, sistem akan otomatis membatalkan proses dan kembali ke menu utama.
 
-<img width="378" height="86" alt="image" src="https://github.com/user-attachments/assets/54673b9b-885d-4d9b-ac7e-d0da1ec08223" />
-
-Jika objeknya Perawatan, tampilkanInfo() akan menampilkan info umum layanan ditambah baris jenis perawatan.
-
-## Tampilan Output Sistem
+Berikut adalah dokumentasi tampilan output sistem saat program dijalankan:
 
 **1. Menu Utama**
 
@@ -99,15 +108,15 @@ Setelah memilih menu nomor pertama, maka kita akan dialihkan ke pilihan menu unt
 
 * Tambah Data Layanan Perawatan
 
-<img width="221" height="233" alt="image" src="https://github.com/user-attachments/assets/6522e991-ec21-42dc-a2f8-34185e95074b" />
+<img width="290" height="299" alt="image" src="https://github.com/user-attachments/assets/f7441e3a-f1dd-47a2-bec5-e90e55aecb92" />
 
-Jika memilih opsi nomor 1 (perawatan), kita diminta mengisi formulir data layanan seperti pada gambar. Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan." yang menandakan data telah tersimpan.
+Jika memilih opsi nomor 1 (perawatan), kita diminta mengisi formulir data layanan seperti pada gambar. Setelah mengisi formulir data umum, kita diminta memilih jenis perawatan (1-3) seperti pada gambar. Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan dengan ID 3." yang menandakan data telah tersimpan.
 
 * Tambah Data Layanan Penitipan
 
 <img width="215" height="233" alt="image" src="https://github.com/user-attachments/assets/54259fbe-ba41-4a36-84f8-f202f5b28887" />
 
-Jika memilih opsi nomor 2 (penitipan), kita diminta mengisi formulir data layanan seperti pada gambar. Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan." yang menandakan data telah tersimpan.
+Jika memilih opsi nomor 2 (penitipan), kita diminta mengisi formulir data layanan seperti pada gambar. Setelah mengisi formulir data umum, kita diminta memasukkan lama penitipan dalam hitungan hari seperti pada gambar. Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan dengan ID 4." yang menandakan data telah tersimpan.
 
 **3. Tampilkan Data Layanan**
 
@@ -115,9 +124,9 @@ Jika memilih opsi nomor 2 (penitipan), kita diminta mengisi formulir data layana
 
 Selanjutnya, jika memilih menu nomor 2 pada menu utama, maka kita akan dialihkan ke tampilan halaman untuk menampilkan data layanan.
 
-<img width="246" height="382" alt="image" src="https://github.com/user-attachments/assets/feab7ca1-1d49-4fb5-8784-1499ce420ba1" />
+<img width="415" height="368" alt="image" src="https://github.com/user-attachments/assets/92bbb694-6c2a-4308-92dd-942e79a29ee6" />
 
-<img width="228" height="341" alt="image" src="https://github.com/user-attachments/assets/66c67345-4b39-489e-a6ac-2ec49f8b9e7d" />
+<img width="284" height="328" alt="image" src="https://github.com/user-attachments/assets/fdc4bf52-4d4e-4974-9e04-2a2feb40fdf7" />
 
 Kedua gambar di atas merupakan tampilan daftar Data Layanan yang berfungsi untuk menampilkan seluruh data layanan yang telah tersimpan di dalam sistem.
 
@@ -127,9 +136,9 @@ Kedua gambar di atas merupakan tampilan daftar Data Layanan yang berfungsi untuk
 
 Selanjutnya, jika memilih menu nomor 3 pada menu utama, maka kita akan dialihkan ke tampilan halaman untuk mengupdate data layanan.
 
-<img width="227" height="196" alt="image" src="https://github.com/user-attachments/assets/5b98a945-81e3-4394-bcd5-b420f366170a" />
+<img width="357" height="383" alt="image" src="https://github.com/user-attachments/assets/c5025b18-3fa1-4df6-8102-cdb23d447f1c" />
 
-Pada menu Update Data Layanan, kita diminta untuk memasukkan ID Layanan yang ingin diubah, lalu mengisi formulir data baru seperti pada gambar di atas. Setelah seluruh data diisi, sistem akan menampilkan notifikasi "Horee! data sudah berhasil diupdate." yang menandakan data telah diperbarui.
+Pada menu Update Data Layanan, kita diminta untuk memasukkan ID Layanan yang ingin diubah, lalu mengisi formulir data baru seperti pada gambar di atas. Setelah seluruh data diisi, sistem akan menampilkan notifikasi "Horee! data sudah berhasil diupdate." yang menandakan data telah diperbarui, lalu menampilkan rincian data layanan terbaru untuk ID tersebut.
 
 **5. Hapus Data Layanan**
 
@@ -137,17 +146,17 @@ Pada menu Update Data Layanan, kita diminta untuk memasukkan ID Layanan yang ing
 
 Selanjutnya, jika memilih menu nomor 4 pada menu utama, maka kita akan dialihkan ke tampilan halaman untuk menghapus data layanan.
 
-<img width="265" height="244" alt="image" src="https://github.com/user-attachments/assets/fb248c43-09d8-478d-9f8e-c799e4abc9b8" />
+<img width="295" height="245" alt="image" src="https://github.com/user-attachments/assets/ab95fe65-3007-47b0-ae70-968391bbd15a" />
 
 Pada menu Hapus Data Layanan, kita diminta untuk memasukkan ID Layanan yang ingin dihapus terlebih dahulu. Setelah detail data ditampilkan, sistem akan meminta konfirmasi penghapusan (ya/tidak). Jika memilih "ya", maka sistem akan menampilkan notifikasi "Data layanan berhasil dihapus!" yang menandakan data telah terhapus dari sistem.
 
-<img width="276" height="242" alt="image" src="https://github.com/user-attachments/assets/e5abb47b-a181-4066-90f4-7ea706f8f2ec" />
+<img width="296" height="245" alt="image" src="https://github.com/user-attachments/assets/bc31aa49-56a6-47f5-b8ab-6ec4c2cef461" />
 
 Jika memilih "tidak" pada konfirmasi penghapusan data, maka sistem akan menampilkan notifikasi "Penghapusan data dibatalkan." yang menandakan data tidak jadi dihapus dari sistem.
 
 **6. Keluar**
 
-<img width="173" height="190" alt="image" src="https://github.com/user-attachments/assets/17035eca-7f41-4a98-8e5c-842a60611d23" />
+<img width="209" height="155" alt="image" src="https://github.com/user-attachments/assets/6d57d27f-1682-47ef-98e1-f83c369af947" />
 
 Jika jita memilih menu nomor kelima, maka kita akan dikeluarkan dari sistem.
 
@@ -182,3 +191,11 @@ Pada gambar di atas, dapat dilihat bahwa jika pengguna memasukkan angka di luar 
 <img width="281" height="233" alt="Screenshot 2026-09-24 100002" src="https://github.com/user-attachments/assets/dc186648-3a42-4c76-9e6d-2da8083cd75f" />
 
 Pada gambar di atas, dapat dilihat bahwa jika pengguna memasukkan jawaban selain "ya" atau "tidak" pada konfirmasi penghapusan, maka sistem akan menampilkan "Jawaban harus 'ya' atau 'tidak'!" untuk memastikan input yang dimasukkan valid.
+
+* ID Kosong saat Update/Hapus
+
+<img width="251" height="68" alt="image" src="https://github.com/user-attachments/assets/60071f03-7055-4366-bfbf-1948751e7ae0" />
+
+<img width="251" height="68" alt="image" src="https://github.com/user-attachments/assets/5b1a7a40-1a33-4cfd-9f0c-2dee25db036d" />
+
+Jika pengguna mengosongkan input ID pada menu Update atau Hapus, sistem akan langsung membatalkan proses dan menampilkan "Dibatalkan, kembali ke menu." tanpa perlu melanjutkan proses update/hapus.
